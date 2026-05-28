@@ -155,7 +155,7 @@ This will start a local server. You can view your content and check for formatti
 Once your content is complete and tested locally:
 
 1.  Push all your changes to your forked repository on GitHub.
-2.  **[Connect](https://layer5.io/company/contact) the Layer5 Team** via Slack, email, or by opening a GitHub issue.
+2.  **[Connect](https://layer5.io/company/contact) the Layer5 Team** via  Slack, email, or by opening a GitHub issue.
 3.  Provide the URL to your content repository.
 
 A Layer5 administrator will then integrate your repository into the main Academy platform. After integration, your learning paths will be visible on the official [Layer5 Cloud site](https://cloud.layer5.io/academy/overview).
