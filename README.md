@@ -154,7 +154,7 @@ This will start a local server. You can view your content and check for formatti
 
 Once your content is complete and tested locally:
 
-1.  Push all your changes to your forked repository on GitHub.
+1.  Push all your changes t o your forked repository on GitHub.
 2.  **[Connect](https://layer5.io/company/contact) the Layer5 Team** via Slack, email, or by opening a GitHub issue.
 3.  Provide the URL to your content repository.
 
