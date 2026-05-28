@@ -152,7 +152,7 @@ This will start a local server. You can view your content and check for formatti
 
 ### 7. Going Live
 
-Once your content is complete and tested locally:
+Once your content  is complete and tested locally:
 
 1.  Push all your changes to your forked repository on GitHub.
 2.  **[Connect](https://layer5.io/company/contact) the Layer5 Team** via Slack, email, or by opening a GitHub issue.
