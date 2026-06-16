@@ -98,11 +98,7 @@ mesheryctl design import -f vllm-inference.yaml -s "Kubernetes Manifest"
 
 You don't have to build this from scratch. An importable version of this exact stack ships with the academy at [`designs/vllm-inference-stack.yaml`](https://github.com/layer5io/digitalocean-academy/blob/master/designs/vllm-inference-stack.yaml). Import it straight from its raw URL and open it in Kanvas to inspect, validate, and deploy:
 
-```bash
-mesheryctl design import \
-  -f https://raw.githubusercontent.com/layer5io/digitalocean-academy/master/designs/vllm-inference-stack.yaml \
-  -s "Kubernetes Manifest"
-```
+{{< meshery-design-embed src="https://kanvas.new/embed.js" id="embedded-design-vllm-inference-stack" size="full" >}}
 
 Two companion designs live alongside it: `qdrant-vector-db.yaml` (a vector database for RAG) and `gpu-observability-stack.yaml` (GPU metrics for Prometheus/Grafana). See the [`designs/` directory](https://github.com/layer5io/digitalocean-academy/tree/master/designs) for all three and their import instructions.
 

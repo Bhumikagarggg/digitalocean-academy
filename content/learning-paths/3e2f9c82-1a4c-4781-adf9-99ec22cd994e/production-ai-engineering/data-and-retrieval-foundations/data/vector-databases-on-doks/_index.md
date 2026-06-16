@@ -64,11 +64,7 @@ Meshery validates the Design, resolves dependencies, and applies it to the targe
 
 **Ready-made design.** The academy ships an importable Qdrant design backed by DigitalOcean Block Storage at [`designs/qdrant-vector-db.yaml`](https://github.com/layer5io/digitalocean-academy/blob/master/designs/qdrant-vector-db.yaml). Import it directly instead of writing one from scratch:
 
-```bash
-mesheryctl design import \
-  -f https://raw.githubusercontent.com/layer5io/digitalocean-academy/master/designs/qdrant-vector-db.yaml \
-  -s "Kubernetes Manifest"
-```
+{{< meshery-design-embed src="https://kanvas.new/embed.js" id="embedded-design-qdrant-vector-db" size="full" >}}
 
 ## Connecting Your Application
 
