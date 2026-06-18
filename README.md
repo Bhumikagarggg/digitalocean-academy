@@ -1,87 +1,159 @@
+[![Meshery Academy](https://img.shields.io/badge/Meshery-Academy-00B39F?style=flat-square&logo=meshery&logoColor=white)](https://cloud.meshery.io/academy)
 
-# Digital Ocean Academy 
-See the currently published content - https://cloud.layer5.io/academy?orgId=3e2f9c82-1a4c-4781-adf9-99ec22cd994e
+![Meshery-Logo](.github/assets/images/meshery-logo-dark-text-side.svg)
 
-This repository is a starter template for creating custom learning paths and courses on the [Layer5 Academy](https://cloud.layer5.io/academy/overview). It provides the necessary file structure and a working example to help you get started quickly.
+# DigitalOcean Academy
 
-This guide will walk you through setting up your own content repository, creating courses, and previewing them locally.
+DigitalOcean Academy is the official learning-content repository for DigitalOcean on the [Meshery Academy](https://cloud.meshery.io/academy) platform. It hosts structured learning paths, challenges, certifications, and Meshery infrastructure designs — helping engineers learn how to manage cloud-native infrastructure with Meshery on DigitalOcean.
 
-> For more in-depth documentation, see the official [Layer5 Academy docs](https://docs.layer5.io/cloud/academy/).
+🔗 **Live site:** <https://digitalocean.layer5.io/academy>
 
-## Prerequisites
+---
 
-Before you begin, ensure you have the following installed on your system:
+## 📚 Overview
 
-  * [**Hugo**](https://gohugo.io/getting-started/installing/) (extended version) （version 0.147.9）
-  * [**Go**](https://go.dev/doc/install) （version 1.12）
+| | |
+|---|---|
+| **Purpose** | Primary source of DigitalOcean-specific Meshery learning content |
+| **Platform** | Runs on the shared [Layer5 Academy](https://cloud.meshery.io/academy) platform |
+| **Authoring** | Markdown-based content with live local preview via Hugo |
+| **Content types** | Learning paths · Challenges · Certifications · Infrastructure designs |
+| **Org ID** | `3e2f9c82-1a4c-4781-adf9-99ec22cd994e` |
 
-## Getting Started
+---
 
-Follow these steps to create your own learning path using this template.
+## 🛠️ Prerequisites
 
-### 1. Fork & Clone the Repository
+Before you begin, ensure you have the following installed:
 
-First, create a copy of this repository under your own GitHub account.
+| Tool | Version | Link |
+|------|---------|------|
+| **Hugo** (extended) | ≥ 0.156.0 | [Install Hugo](https://gohugo.io/getting-started/installing/) |
+| **Go** | ≥ 1.24 | [Install Go](https://go.dev/doc/install) |
+| **Node.js / npm** | LTS | [Install Node.js](https://nodejs.org/) |
+| **Git** | Latest | [Install Git](https://git-scm.com/) |
 
-  - **Fork** this [academy-example](https://github.com/layer5io/academy-example) repository.
-  - Clone your forked repository:
-    ```bash
-    # Replace <your-username> with your GitHub username
-    git clone https://github.com/<your-username>/academy-example.git
-    cd academy-example
-    ```
+---
 
-### 2. Update the Go Module Path
+## 🚀 Getting Started
 
-  - Open the `go.mod` file at the root of the project.
-  - Change the first line from:
-    ```go
-    module github.com/layer5io/academy-example
-    ```
-  - To match your repository's path:
-    ```go
-    module github.com/<your-username>/academy-example
-    ```
-  - Save the file, then commit and push the change.
+### 1. Fork & Clone
 
-### 3. Configure Your Organization Directories
+```bash
+# Fork this repository on GitHub, then clone your fork
+git clone https://github.com/<your-username>/digitalocean-academy.git
+cd digitalocean-academy
+```
 
-The Academy platform uses an **Organization UID** to keep content separate and secure. You must get this ID from the Layer5 CLoud before proceeding.
+### 2. Install Dependencies
 
-Once you have your UID, rename the placeholder directories:
+```bash
+npm install
+```
 
-  - Rename `content/learning-paths/your-org-uid` to `content/learning-paths/<your-organization-uid>`
-  - Rename `static/your-org-uuid` to `static/<your-organization-uid>`
-  - Rename `layouts/shortcodes/your-org-uuid` to `layouts/shortcodes/<your-organization-uid>`
+### 3. Run the Site Locally
 
-### 4. Add Your Content
+Start the Hugo development server with drafts and future content enabled:
 
-Now you're ready to create your learning path. The structure is: **Learning Path → Course → Chapter → Lesson**.
+```bash
+hugo server -D
+```
 
-A high-level view of the structure looks like this:
-  ```text
-  content/
-  └── learning-paths/
-      ├── _index.md
-      └── <your-organization-uid>/
-          └── <your-learning-path>/
-              ├── _index.md
-              └── <your-course-1>/
-              └── <your-course-2>/
-                  ├── _index.md
-                  └── content/
-                      └── your-lesson-1.md
-                      └── your-lesson-2.md
-  ```
+Or use the Makefile target (includes draft **and** future content):
 
-  - **Delete the example content** inside `content/learning-paths/<your-organization-uid>/`.
-  - **Create your folder structure** following the example's hierarchy.
-  - **Add your lessons** as Markdown (`.md`) files inside the `content` directory of a course.
-  - **Use frontmatter** at the top of your `_index.md` and lesson files to define titles, descriptions, and weights.
+```bash
+make site
+```
 
-### Add Assessments
+The site will be available at `http://localhost:1313/academy/` (or the port shown in your terminal).
 
-Assessment files use the Academy test layout and define their questions in Markdown frontmatter. Use short, stable IDs for questions and options; question IDs must be unique within one assessment, and option IDs must be unique within one question. The Academy theme converts these author-facing IDs into deterministic UUIDs in the generated JSON consumed by Layer5 Cloud.
+> **Note:** The local preview uses basic styling. Full Academy branding is applied after content is integrated into the cloud platform.
+
+### 4. Other Useful Commands
+
+| Command | Description |
+|---------|-------------|
+| `make setup` | Install npm dependencies |
+| `make build` | Build the site for production |
+| `make clean` | Clear build cache and restart the dev server |
+| `make theme-update` | Update the `academy-theme` Hugo module to the latest version |
+
+---
+
+## 📁 Repository Structure
+
+```text
+digitalocean-academy/
+├── .github/                  # GitHub workflows, issue templates, PR templates
+│   ├── build/                # Makefile includes
+│   ├── readme/images/        # README assets
+│   ├── workflows/            # CI/CD pipelines
+│   └── PULL_REQUEST_TEMPLATE.md
+├── assets/json/              # JSON data assets
+├── content/                  # 📝 All learning content lives here
+│   ├── _index.md             # Site root page
+│   ├── learning-paths/       # Learning paths scoped by org ID
+│   ├── certifications/       # Certification content
+│   └── challenges/           # Challenge content
+├── designs/                  # Meshery infrastructure designs (YAML)
+├── layouts/                  # Hugo layout overrides & shortcodes
+│   ├── _partials/            # Partial templates
+│   └── shortcodes/           # Custom Hugo shortcodes
+├── public/                   # Generated site output (git-ignored)
+├── resources/                # Hugo resource cache
+├── go.mod / go.sum           # Go module (pulls academy-theme)
+├── hugo.yaml                 # Hugo configuration
+├── Makefile                  # Build & dev targets
+├── package.json              # Node.js dependencies
+└── README.md                 # ← You are here
+```
+
+---
+
+## ✍️ Content Authoring
+
+### Content Hierarchy
+
+The Academy content follows this structure: **Learning Path → Course → Chapter → Lesson**.
+
+```text
+content/
+└── learning-paths/
+    ├── _index.md
+    └── 3e2f9c82-1a4c-4781-adf9-99ec22cd994e/   # DigitalOcean org UID
+        └── <your-learning-path>/
+            ├── _index.md
+            └── <your-course>/
+                ├── _index.md
+                └── content/
+                    ├── lesson-1.md
+                    └── lesson-2.md
+```
+
+### Adding Images
+
+Use the `usestatic` shortcode (not standard Markdown image links) for tenant-aware asset paths:
+
+1. Place your image in `static/3e2f9c82-1a4c-4781-adf9-99ec22cd994e/images/`
+2. Reference it in your lesson:
+   ```text
+   ![Alt text]({{< usestatic path="images/your-image.png" >}})
+   ```
+
+### Adding Videos
+
+```text
+{{< card title="Video: Example" >}}
+<video width="100%" height="100%" controls>
+    <source src="https://example.com/video.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+</video>
+{{< /card >}}
+```
+
+### Adding Assessments
+
+Assessment files use the Academy test layout. Question and option IDs must be unique within their scope.
 
 ```yaml
 ---
@@ -107,57 +179,62 @@ questions:
 ---
 ```
 
-### 5. Add Assets (Images & Videos)
+---
 
-Enhance your course with images and other visual aids. To ensure compatibility with the multi-tenant Academy platform, **do not use standard Markdown image links**. Instead, use the `usestatic` shortcode, which generates the correct, tenant-aware path for your assets.
+## 🤝 Contribution Workflow
 
-**How to Add an Image**
+We welcome contributions! Please follow the **fork → branch → commit → push → pull request** workflow:
 
-1.  Place your image file (e.g., `hugo-logo.png`) in your scoped static directory:
+### Step-by-Step
 
-    ```text
-    static/<your-organization-uid>/images/hugo-logo.png
-    ```
-2.  In your `lesson-1.md` file, embed the image using the `usestatic` shortcode. The `path` is relative to your scoped static folder: 
+1. **Fork** this repository on GitHub.
+2. **Clone** your fork locally:
+   ```bash
+   git clone https://github.com/<your-username>/digitalocean-academy.git
+   cd digitalocean-academy
+   ```
+3. **Create a branch** for your changes:
+   ```bash
+   git checkout -b feature/<your-username>/<issue-number>
+   ```
+4. **Make your changes** — add or edit content in `content/`, fix bugs, improve docs.
+5. **Preview locally** to verify:
+   ```bash
+   hugo server -D
+   ```
+6. **Commit** with a sign-off (required by DCO):
+   ```bash
+   git commit -s -m "docs: describe your change"
+   ```
+7. **Push** to your fork:
+   ```bash
+   git push origin feature/<your-username>/<issue-number>
+   ```
+8. **Open a Pull Request** against the `master` branch of this repository.
 
-    ```text
-    ![The Hugo Logo]({{</* usestatic path="images/hugo-logo.png" */>}})
-    ```
+> For a detailed guide on the fork-and-pull workflow, see [CONTRIBUTING-gitflow.md](./CONTRIBUTING-gitflow.md).
 
-Then the system will automatically convert this into the correct URL when building the site.
+### Important Guidelines
 
-**How to Add a Video**
+- All commits must be **signed-off** ([Developer Certificate of Origin](https://developercertificate.org/)).
+- Pull requests should reference an open issue.
+- See [CONTRIBUTING.md](./CONTRIBUTING.md) for the full contribution guide.
+- See [CODE_OF_CONDUCT.md](./CODE_OF_CONDUCT.md) for community standards.
 
-```text
-{{</* card 
-title="Video: Example" */>}}
-<video width="100%" height="100%" controls>
-    <source src="https://exmaple.mp4" type="video/mp4">
-    Your browser does not support the video tag.
-</video>
-{{</* /card */>}}
-```
+---
 
-### 6. Local Development
+## 🔗 Related Repositories
 
-To preview your content locally, run the Hugo server from the project root:
+| Repository | Description |
+|---|---|
+| [meshery/meshery](https://github.com/meshery/meshery) | Meshery core project |
+| [meshery-extensions/meshery-academy](https://github.com/meshery-extensions/meshery-academy) | Meshery Academy content |
+| [meshery-extensions/digitalocean-academy](https://github.com/meshery-extensions/digitalocean-academy) | This repository (upstream) |
+| [layer5io/academy-theme](https://github.com/layer5io/academy-theme) | Academy Hugo theme — styles, shortcodes, layouts |
+| [layer5io/academy-build](https://github.com/layer5io/academy-build) | Build pipeline that aggregates academies for publishing |
 
-```bash
-hugo server
-```
+---
 
-This will start a local server. You can view your content and check for formatting issues before publishing.
+## 📄 License
 
-> The local preview uses basic styling. Full Academy branding and styles will be applied after your content is integrated into the cloud platform.
-
-### 7. Going Live
-
-Once your content is complete and tested locally:
-
-1.  Push all your changes to your forked repository on GitHub.
-2.  **[Connect](https://layer5.io/company/contact) the Layer5 Team** via Slack, email, or by opening a GitHub issue.
-3.  Provide the URL to your content repository.
-
-A Layer5 administrator will then integrate your repository into the main Academy platform. After integration, your learning paths will be visible on the official [Layer5 Cloud site](https://cloud.layer5.io/academy/overview).
-
-
+This repository is available as open source under the terms of the [Apache 2.0 License](./LICENSE).
