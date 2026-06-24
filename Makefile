@@ -14,11 +14,10 @@
 
 include .github/build/Makefile.core.mk
 include .github/build/Makefile.show-help.mk
-
 #----------------------------------------------------------------------------
 # Academy
 # ---------------------------------------------------------------------------
-.PHONY: setup build site serve clean check-go check-deps theme-update
+.PHONY: setup build build-preview site serve clean lint-fix check-go check-deps theme-update
 
 ## ------------------------------------------------------------
 ----LOCAL_BUILDS: Show help for available targets
@@ -38,6 +37,10 @@ check-deps:
 build: check-deps check-go
 	npm run dev:build
 
+## Build site for local consumption
+build-preview: check-deps check-go
+	npx hugo --baseURL=$(BASEURL)
+
 ## Local: Build and run site locally with draft and future content enabled.
 site: check-go check-deps
 	npm run dev:site
@@ -50,6 +53,17 @@ serve: check-go check-deps
 clean:
 	npm run clean
 	$(MAKE) site
+
+## Fix Markdown linting issues
+lint-fix:
+	@echo "Checking for markdownlint-cli2..."
+	@command -v markdownlint-cli2 > /dev/null || { \
+		echo "markdownlint-cli2 not found. Attempting to install globally..."; \
+		command -v npm > /dev/null || { echo "npm is not installed. Please install Node.js/npm and re-run 'make lint-fix'."; exit 1; }; \
+		npm install -g markdownlint-cli2; \
+	}
+	@echo "Running markdownlint-cli2 --fix..."
+	@markdownlint-cli2 --fix "**/*.md" "#node_modules" "#public" "#resources"
 
 ## ------------------------------------------------------------
 ----MAINTENANCE: Show help for available targets
