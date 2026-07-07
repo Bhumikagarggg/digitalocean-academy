@@ -17,6 +17,8 @@ include .github/build/Makefile.show-help.mk
 
 # Changes to any main recipe in this Makefile, require a corresponding change in all other repositories subscribed to the 'meshery-academy' topic.
 
+# htmltest is fetched and run on demand via 'go run' (no install step). Pin it for
+# reproducible link checks; leave as 'latest' to always use the newest release.
 HTMLTEST_VERSION ?= latest
 export HTMLTEST_VERSION
 
@@ -68,15 +70,11 @@ build-production: check-go check-deps
 
 ## Build and run the site locally with live reload (draft and future content enabled).
 site: check-go check-deps
-	npm run dev:site
+	npm run site
 
 ## Build and serve the site once with the file-watcher off (no live reload).
 site-no-watch: check-go check-deps
-	npm run dev:serve
-
-## Build and run site locally
-serve: check-go check-deps
-	npm run dev:serve
+	npm run site:no-watch
 
 ## Empty the build cache, reinstall dependencies, and run the site locally.
 clean:
@@ -84,7 +82,7 @@ clean:
 	$(MAKE) setup
 	$(MAKE) site
 
-## Check internal links in the built site.
+## Check internal links in the built site (htmltest is fetched on demand via 'go run').
 check-links: check-go check-deps
 	npm run check:links
 
@@ -98,14 +96,13 @@ format-check:
 
 ## Fix Markdown linting issues
 lint-fix:
-	npm run lint:fix
+	npx --yes markdownlint-cli2 --fix "content/**/*.md"
 
 .PHONY: \
 	setup \
 	build \
 	build-preview \
 	build-production \
-	serve \
 	site \
 	site-no-watch \
 	clean \
